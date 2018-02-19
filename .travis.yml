@@ -5,4 +5,5 @@ mono: none
 dotnet: 2.0.0
 script:
   - dotnet restore PTZ.Frw.sln
-  - dotnet build PTZ.Frw.sln
+  - dotnet build PTZ.Frw.WebAPI/PTZ.Frw.WebAPI.csproj
+  - dotnet test PTZ.Frw.WebAPI.Tests/PTZ.Frw.WebAPI.Tests.csproj

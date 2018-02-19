@@ -9,7 +9,7 @@ namespace PTZ.Frw.WebAPI.Tests
         [TestMethod]
         public void GetById()
         {
-            var controller = new ValuesController();
+            var controller = new ValuesController(null);
 
             Assert.IsTrue(controller.Get(1) == "value");
         }
