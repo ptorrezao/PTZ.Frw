@@ -1,0 +1,8 @@
+version: '3'
+
+services:
+  ptz.frw.webapi:
+    image: ptz.frw.webapi
+    build:
+      context: .
+      dockerfile: PTZ.Frw.WebAPI/Dockerfile
