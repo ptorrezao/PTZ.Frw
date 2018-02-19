@@ -2,6 +2,8 @@
 using System.Collections.Generic;
 using System.Linq;
 using System.Threading.Tasks;
+using Microsoft.AspNetCore.Authorization;
+using Microsoft.AspNetCore.Http;
 using Microsoft.AspNetCore.Mvc;
 
 namespace PTZ.Frw.WebAPI.Controllers
@@ -9,11 +11,19 @@ namespace PTZ.Frw.WebAPI.Controllers
     [Route("api/[controller]")]
     public class ValuesController : Controller
     {
+        private int _currentUser;
+
+        public ValuesController(IHttpContextAccessor httpContextAccessor)
+        {
+            _currentUser = httpContextAccessor.CurrentUser();
+        }
+
         // GET api/values
         [HttpGet]
+        [Authorize]
         public IEnumerable<string> Get()
         {
-            return new string[] { "value1", "value2" };
+            return new string[] { _currentUser.ToString(), "value2" };
         }
 
         // GET api/values/5
