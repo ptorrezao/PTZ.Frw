@@ -14,8 +14,11 @@ using Microsoft.IdentityModel.Tokens;
 using PTZ.Frw.WebAPI.Interfaces;
 using PTZ.Frw.WebApi.Services.SignInManager;
 using Swashbuckle.AspNetCore.Swagger;
-using PTZ.Frw.WebApi.Services.UserManager;
 using Microsoft.AspNetCore.Http;
+using PTZ.Frw.DataAccess.Interfaces;
+using PTZ.Frw.DataAccess.Services.UserManager;
+using PTZ.Frw.DataAccess.Services;
+using Microsoft.EntityFrameworkCore;
 
 namespace PTZ.Frw.WebAPI
 {
@@ -52,6 +55,14 @@ namespace PTZ.Frw.WebAPI
                         IssuerSigningKey = new SymmetricSecurityKey(Encoding.UTF8.GetBytes(Configuration["Tokens:Key"]))
                     };
                 });
+
+            var server = Configuration["Database:Server"];
+            var database = Configuration["Database:Name"];
+            var user = Configuration["Database:User"];
+            var password = Configuration["Database:Password"];
+            var connection = String.Format("Server={0};Database={1};User={2};Password={3};", server, database, user, password);
+
+            services.AddDbContext<PTZFrwContext>(options => options.UseSqlServer(connection));
 
             services.AddSingleton<IHttpContextAccessor, HttpContextAccessor>();
             services.AddTransient<ISignInManager, SignInManager>();

@@ -1,0 +1,17 @@
+<Project Sdk="Microsoft.NET.Sdk">
+
+  <PropertyGroup>
+    <TargetFramework>netcoreapp2.0</TargetFramework>
+  </PropertyGroup>
+
+  <ItemGroup>
+    <PackageReference Include="Microsoft.EntityFrameworkCore.SqlServer" Version="2.0.1" />
+    <PackageReference Include="Microsoft.EntityFrameworkCore.Tools" Version="2.0.1" />
+  </ItemGroup>
+
+  <ItemGroup>
+    <ProjectReference Include="..\PTZ.Frw.DataAccess.Models\PTZ.Frw.DataAccess.Models.csproj" />
+    <ProjectReference Include="..\PTZ.Frw.WebAPI.Models\PTZ.Frw.WebAPI.Models.csproj" />
+  </ItemGroup>
+
+</Project>

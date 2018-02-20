@@ -1,6 +1,6 @@
 ﻿using PTZ.Frw.DataAccess.Models;
 
-namespace PTZ.Frw.WebAPI.Interfaces
+namespace PTZ.Frw.DataAccess.Interfaces
 {
     public interface IUserManager
     {

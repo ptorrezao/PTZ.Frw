@@ -1,8 +1,8 @@
-﻿
-using Microsoft.AspNetCore.Authorization;
+﻿using Microsoft.AspNetCore.Authorization;
 using Microsoft.AspNetCore.Mvc;
 using Microsoft.Extensions.Configuration;
 using Microsoft.IdentityModel.Tokens;
+using PTZ.Frw.DataAccess.Interfaces;
 using PTZ.Frw.DataAccess.Models;
 using PTZ.Frw.WebAPI.Interfaces;
 using PTZ.Frw.WebAPI.Models;
