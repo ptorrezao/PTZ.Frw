@@ -19,7 +19,7 @@ Project("{2150E333-8FDC-42A3-9474-1A3956D46DE8}") = "DataAccess", "DataAccess", 
 EndProject
 Project("{9A19103F-16F7-4668-BE54-9A1E7A4F7556}") = "PTZ.Frw.WebApi.Services", "PTZ.Frw.WebApi.Services\PTZ.Frw.WebApi.Services.csproj", "{556D2B29-D58F-4CD4-B347-6CADC761465A}"
 EndProject
-Project("{FAE04EC0-301F-11D3-BF4B-00C04F79EFBC}") = "PTZ.Frw.DataAccess.Services", "PTZ.Frw.DataAccess.Services\PTZ.Frw.DataAccess.Services.csproj", "{2973817E-DB43-461E-ADD5-285A91EFFA32}"
+Project("{9A19103F-16F7-4668-BE54-9A1E7A4F7556}") = "PTZ.Frw.DataAccess.Services", "PTZ.Frw.DataAccess.Services\PTZ.Frw.DataAccess.Services.csproj", "{2973817E-DB43-461E-ADD5-285A91EFFA32}"
 EndProject
 Global
 	GlobalSection(SolutionConfigurationPlatforms) = preSolution

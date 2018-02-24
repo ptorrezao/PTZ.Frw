@@ -7,8 +7,11 @@ services:
       context: .
       dockerfile: PTZ.Frw.WebAPI/Dockerfile
     depends_on:
-     - sql.data
-  sql.data:
+     - sql
+    ports:
+     - "32784:80"
+    tty: true
+  sql:
     image: microsoft/mssql-server-linux
     environment:
       - MSSQL_SA_PASSWORD=Pass@word
