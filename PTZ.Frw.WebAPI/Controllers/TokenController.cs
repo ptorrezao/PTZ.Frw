@@ -32,7 +32,7 @@ namespace PTZ.Frw.WebAPI.Controllers
         [AllowAnonymous]
         public IActionResult Login([FromBody] AuthRequest authUserRequest)
         {
-            User user = _userManager.FindByEmail(authUserRequest.UserName);
+            User user = _userManager.FindByUsername(authUserRequest.UserName);
 
             if (user != null)
             {
@@ -40,7 +40,7 @@ namespace PTZ.Frw.WebAPI.Controllers
                 if (checkPwd)
                 {
                     var claims = new[] {
-                        new Claim(JwtRegisteredClaimNames.Sub, user.UserName),
+                        new Claim(JwtRegisteredClaimNames.Sub, user.Username),
                         new Claim(JwtRegisteredClaimNames.Jti, user.Id.ToString()),
                         new Claim(ClaimTypes.Name, authUserRequest.UserName)
                     };

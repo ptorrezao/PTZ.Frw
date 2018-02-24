@@ -11,9 +11,10 @@ using System;
 namespace PTZ.Frw.DataAccess.Services.Migrations
 {
     [DbContext(typeof(PTZFrwContext))]
-    partial class PTZFrwContextModelSnapshot : ModelSnapshot
+    [Migration("20180224123900_Refactor User")]
+    partial class RefactorUser
     {
-        protected override void BuildModel(ModelBuilder modelBuilder)
+        protected override void BuildTargetModel(ModelBuilder modelBuilder)
         {
 #pragma warning disable 612, 618
             modelBuilder
@@ -34,7 +35,11 @@ namespace PTZ.Frw.DataAccess.Services.Migrations
                     b.HasKey("Id");
 
                     b.ToTable("Users");
+
+
                 });
+
+            
 #pragma warning restore 612, 618
         }
     }

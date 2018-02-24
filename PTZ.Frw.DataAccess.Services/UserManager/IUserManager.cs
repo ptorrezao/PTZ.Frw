@@ -4,6 +4,8 @@ namespace PTZ.Frw.DataAccess.Interfaces
 {
     public interface IUserManager
     {
-        User FindByEmail(string userName);
+        User FindByUsername(string userName);
+
+        User SaveUser(User user);
     }
 }
