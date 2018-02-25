@@ -9,9 +9,20 @@ namespace PTZ.Frw.DataAccess
     {
         private readonly PTZFrwContext _context;
 
+        public UserRepository()
+        {
+        }
+
         public UserRepository(PTZFrwContext ctx)
         {
             _context = ctx;
+        }
+
+        public void DeleteUser(int id)
+        {
+            User user = _context.Users.FirstOrDefault(x => x.Id == id);
+            _context.Users.Remove(user);
+            _context.SaveChanges();
         }
 
         public User GetUser(int key)
@@ -46,12 +57,15 @@ namespace PTZ.Frw.DataAccess
 
         public User SaveUser(User user)
         {
-            if (user.Id > 0)
+            bool userExists = _context.Users.Any(x => x.Id == user.Id) && user.Id > 0;
+
+            if (userExists)
             {
                 _context.Users.Update(user);
             }
             else
             {
+                user.Id = 0;
                 _context.Users.Add(user);
 
             }

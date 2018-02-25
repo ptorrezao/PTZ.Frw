@@ -33,30 +33,25 @@ namespace PTZ.Frw.WebAPI.Controllers
             return _userManager.GetUsers();
         }
 
-        // GET api/values/5
+        // GET api/Users/5
         [HttpGet("{id}")]
         public UserDTO Get(int id)
         {
             return _userManager.GetUser(id);
         }
 
-        // POST api/values
         [HttpPost]
-        [Obsolete]
-        public void Post([FromBody]string value)
+        public UserDTO Post([FromBody]UserDTO value)
         {
+            return null;
         }
 
-        // PUT api/values/5
-        [HttpPut("{id}")]
-        public void Put(int id, [FromBody]string value)
-        {
-        }
 
-        // DELETE api/values/5
+        // DELETE api/Users/5
         [HttpDelete("{id}")]
         public void Delete(int id)
         {
+            _userManager.DeleteUser(id);
         }
     }
 }

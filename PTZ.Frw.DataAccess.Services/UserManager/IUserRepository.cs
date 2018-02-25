@@ -14,5 +14,7 @@ namespace PTZ.Frw.DataAccess
         List<User> GetUsers();
 
         User GetUserByUsername(string username);
+
+        void DeleteUser(int id);
     }
 }

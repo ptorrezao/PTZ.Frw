@@ -10,5 +10,7 @@ namespace PTZ.Frw.WebAPI.Interfaces
         UserDTO FindByUsername(string username);
         IEnumerable<UserDTO> GetUsers();
         UserDTO GetUser(int key);
+        UserDTO SaveUser(UserDTO value);
+        void DeleteUser(int id);
     }
 }

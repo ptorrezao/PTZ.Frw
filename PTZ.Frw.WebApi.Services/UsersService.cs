@@ -16,9 +16,15 @@ namespace PTZ.Frw.WebApi.Services.UserManager
         public UserService(IUserRepository usrMng)
         {
             TinyMapper.Bind<User, UserDTO>();
+            TinyMapper.Bind<UserDTO, User>();
             TinyMapper.Bind<List<User>, List<UserDTO>>();
 
             _usrMng = usrMng;
+        }
+
+        public void DeleteUser(int id)
+        {
+            _usrMng.DeleteUser(id);
         }
 
         public UserDTO FindByUsername(string username)
@@ -39,6 +45,17 @@ namespace PTZ.Frw.WebApi.Services.UserManager
         {
             List<User> users = _usrMng.GetUsers();
             return TinyMapper.Map<List<UserDTO>>(users);
+        }
+
+        public UserDTO SaveUser(UserDTO userDto)
+        {
+            User user = TinyMapper.Map<User>(userDto);
+
+            _usrMng.SaveUser(user);
+
+            user = _usrMng.GetUser(user.Id);
+
+            return TinyMapper.Map<UserDTO>(user);
         }
     }
 }
