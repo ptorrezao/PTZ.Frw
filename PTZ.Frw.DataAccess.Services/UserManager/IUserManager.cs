@@ -7,5 +7,6 @@ namespace PTZ.Frw.DataAccess.Interfaces
         User FindByUsername(string userName);
 
         User SaveUser(User user);
+        bool UserExists(string username);
     }
 }

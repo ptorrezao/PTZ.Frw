@@ -15,24 +15,24 @@ using System.Text;
 namespace PTZ.Frw.WebAPI.Controllers
 {
     [Route("api/[controller]")]
-    public class TokenController : Controller
+    public class AuthenticationController : Controller
     {
         private readonly IConfiguration _config;
         private readonly IUserManager _userManager;
         private readonly ISignInManager _signInManager;
 
-        public TokenController(IConfiguration configuration, IUserManager userManager, ISignInManager signInManager)
+        public AuthenticationController(IConfiguration configuration, IUserManager userManager, ISignInManager signInManager)
         {
             _config = configuration;
             _userManager = userManager;
             _signInManager = signInManager;
         }
 
-        [HttpPost("")]
+        [HttpPost("Login")]
         [AllowAnonymous]
         public IActionResult Login([FromBody] AuthRequest authUserRequest)
         {
-            User user = _userManager.FindByUsername(authUserRequest.UserName);
+            User user = _userManager.FindByUsername(authUserRequest.Username);
 
             if (user != null)
             {
@@ -42,7 +42,7 @@ namespace PTZ.Frw.WebAPI.Controllers
                     var claims = new[] {
                         new Claim(JwtRegisteredClaimNames.Sub, user.Username),
                         new Claim(JwtRegisteredClaimNames.Jti, user.Id.ToString()),
-                        new Claim(ClaimTypes.Name, authUserRequest.UserName)
+                        new Claim(ClaimTypes.Name, authUserRequest.Username)
                     };
 
                     var key = new SymmetricSecurityKey(Encoding.UTF8.GetBytes(_config["Tokens:Key"]));
@@ -63,6 +63,19 @@ namespace PTZ.Frw.WebAPI.Controllers
             }
 
             return BadRequest("Could not verify username and password");
+        }
+
+        [HttpPost("Register")]
+        [AllowAnonymous]
+        public IActionResult Register([FromBody] RegisterRequest registerRequest)
+        {
+            bool checkPwd = _signInManager.RegisterUser(registerRequest);
+            if (checkPwd)
+            {
+                return Login(registerRequest as AuthRequest);
+            }
+
+            return BadRequest("Could not register user");
         }
     }
 }

@@ -16,19 +16,35 @@ namespace PTZ.Frw.DataAccess.Services.UserManager
 
         public User FindByUsername(string userName)
         {
-            var user = _context.Users.FirstOrDefault(x => x.Username == userName);
+            User user = _context.Users.FirstOrDefault(x => x.Username == userName);
 
-            PerformValidations(user);
+            if (user != null)
+            {
+                PerformValidations(user);
+            }
 
             return user;
         }
 
         public User SaveUser(User user)
         {
-            _context.Users.Update(user);
+            if (user.Id > 0)
+            {
+                _context.Users.Update(user);
+            }
+            else
+            {
+                _context.Users.Add(user);
+
+            }
             _context.SaveChanges();
 
             return _context.Users.FirstOrDefault(x => x.Username == user.Username);
+        }
+
+        public bool UserExists(string username)
+        {
+            return _context.Users.Any(x => x.Username == username);
         }
 
         private void PerformValidations(User user)

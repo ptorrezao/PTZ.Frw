@@ -11,9 +11,10 @@ using System;
 namespace PTZ.Frw.DataAccess.Services.Migrations
 {
     [DbContext(typeof(PTZFrwContext))]
-    partial class PTZFrwContextModelSnapshot : ModelSnapshot
+    [Migration("20180225141920_Extend User to Userdetail")]
+    partial class ExtendUsertoUserdetail
     {
-        protected override void BuildModel(ModelBuilder modelBuilder)
+        protected override void BuildTargetModel(ModelBuilder modelBuilder)
         {
 #pragma warning disable 612, 618
             modelBuilder
@@ -46,15 +47,7 @@ namespace PTZ.Frw.DataAccess.Services.Migrations
                     b.Property<int>("Id")
                         .ValueGeneratedOnAdd();
 
-                    b.Property<string>("Address");
-
-                    b.Property<string>("City");
-
-                    b.Property<string>("Country");
-
                     b.Property<string>("PhoneNumber");
-
-                    b.Property<string>("ZipCode");
 
                     b.HasKey("Id");
 
@@ -63,7 +56,7 @@ namespace PTZ.Frw.DataAccess.Services.Migrations
 
             modelBuilder.Entity("PTZ.Frw.DataAccess.Models.User", b =>
                 {
-                    b.HasOne("PTZ.Frw.DataAccess.Models.UserDetails", "Details")
+                    b.HasOne("PTZ.Frw.DataAccess.Models.UserDetails", "details")
                         .WithOne("User")
                         .HasForeignKey("PTZ.Frw.DataAccess.Models.User", "Id")
                         .OnDelete(DeleteBehavior.Cascade);

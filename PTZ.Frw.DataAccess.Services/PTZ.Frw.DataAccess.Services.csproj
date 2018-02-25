@@ -5,6 +5,12 @@
   </PropertyGroup>
 
   <ItemGroup>
+    <Compile Remove="Migrations\20180225141120_Extende User to Userdetail.cs" />
+    <Compile Remove="Migrations\20180225141411_20180225141120_Extende User to Userdetail.cs" />
+    <Compile Remove="Migrations\20180225141503_Extend User to Userdetail.cs" />
+  </ItemGroup>
+
+  <ItemGroup>
     <PackageReference Include="Microsoft.EntityFrameworkCore.SqlServer" Version="2.0.1" />
     <PackageReference Include="Microsoft.EntityFrameworkCore.Tools" Version="2.0.1" />
   </ItemGroup>

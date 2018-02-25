@@ -14,6 +14,14 @@ namespace PTZ.Frw.DataAccess.Services
 
         }
         public DbSet<User> Users { get; set; }
-    }
 
+        protected override void OnModelCreating(ModelBuilder modelBuilder)
+        {
+            modelBuilder.Entity<User>()
+                .HasOne(x => x.Details)
+                .WithOne(b => b.User);
+
+            base.OnModelCreating(modelBuilder);
+        }
+    }
 }

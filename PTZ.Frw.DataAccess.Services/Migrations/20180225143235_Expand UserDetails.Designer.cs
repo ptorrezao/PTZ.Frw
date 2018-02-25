@@ -11,9 +11,10 @@ using System;
 namespace PTZ.Frw.DataAccess.Services.Migrations
 {
     [DbContext(typeof(PTZFrwContext))]
-    partial class PTZFrwContextModelSnapshot : ModelSnapshot
+    [Migration("20180225143235_Expand UserDetails")]
+    partial class ExpandUserDetails
     {
-        protected override void BuildModel(ModelBuilder modelBuilder)
+        protected override void BuildTargetModel(ModelBuilder modelBuilder)
         {
 #pragma warning disable 612, 618
             modelBuilder
