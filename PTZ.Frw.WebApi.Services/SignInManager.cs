@@ -18,8 +18,7 @@ namespace PTZ.Frw.WebApi.Services.SignInManager
         {
             TinyMapper.Bind<RegisterRequest, User>();
             TinyMapper.Bind<RegisterRequest, UserDetails>();
-            TinyMapper.Bind<User, UserDTO>();
-
+       
             _usrMng = usrMng;
             _userSvc = userSvc;
         }
