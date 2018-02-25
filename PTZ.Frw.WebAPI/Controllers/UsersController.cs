@@ -43,7 +43,7 @@ namespace PTZ.Frw.WebAPI.Controllers
         [HttpPost]
         public UserDTO Post([FromBody]UserDTO value)
         {
-            return null;
+            return _userManager.SaveUser(value);
         }
 
 

@@ -66,6 +66,9 @@ namespace PTZ.Frw.DataAccess
             else
             {
                 user.Id = 0;
+
+                user.Details = user.Details ?? new UserDetails();
+
                 _context.Users.Add(user);
 
             }
