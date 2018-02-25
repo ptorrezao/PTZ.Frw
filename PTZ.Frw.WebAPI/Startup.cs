@@ -36,40 +36,9 @@ namespace PTZ.Frw.WebAPI
         {
             services.AddMvc();
 
-            services.AddSwaggerGen(c =>
-            {
-                c.SwaggerDoc("v1", new Info { Title = "PTZ.Frw", Version = "v1" });
-                c.AddSecurityDefinition("Bearer", new ApiKeyScheme
-                {
-                    Description = "JWT Authorization header using the Bearer scheme. Example: \"Authorization: Bearer {token}\"",
-                    Name = "Authorization",
-                    In = "header",
-                    Type = "apiKey"
-                });
-            });
-
-            services.AddAuthentication(JwtBearerDefaults.AuthenticationScheme)
-                .AddJwtBearer(options =>
-                {
-                    options.TokenValidationParameters = new TokenValidationParameters
-                    {
-                        ValidateIssuer = true,
-                        ValidateAudience = true,
-                        ValidateLifetime = true,
-                        ValidateIssuerSigningKey = true,
-                        ValidIssuer = Configuration["Tokens:Issuer"],
-                        ValidAudience = Configuration["Tokens:Issuer"],
-                        IssuerSigningKey = new SymmetricSecurityKey(Encoding.UTF8.GetBytes(Configuration["Tokens:Key"]))
-                    };
-                });
-
-            var server = Configuration["Database:Server"];
-            var database = Configuration["Database:Name"];
-            var user = Configuration["Database:User"];
-            var password = Configuration["Database:Password"];
-            var connection = String.Format("Server={0};Database={1};User={2};Password={3};", server, database, user, password);
-
-            services.AddDbContext<PTZFrwContext>(options => options.UseSqlServer(connection));
+            this.AddSwagger(services);
+            this.AddAuthentication(services);
+            this.DatabaseContext(services);
 
             services.AddSingleton<IHttpContextAccessor, HttpContextAccessor>();
             services.AddTransient<ISignInManager, SignInManager>();
@@ -92,6 +61,59 @@ namespace PTZ.Frw.WebAPI
 
             app.UseAuthentication();
             app.UseMvc();
+        }
+
+        private void AddAuthentication(IServiceCollection services)
+        {
+            services.AddAuthentication(JwtBearerDefaults.AuthenticationScheme)
+                            .AddJwtBearer(options =>
+                            {
+                                options.TokenValidationParameters = new TokenValidationParameters
+                                {
+                                    ValidateIssuer = true,
+                                    ValidateAudience = true,
+                                    ValidateLifetime = true,
+                                    ValidateIssuerSigningKey = true,
+                                    ValidIssuer = Configuration["Tokens:Issuer"],
+                                    ValidAudience = Configuration["Tokens:Issuer"],
+                                    IssuerSigningKey = new SymmetricSecurityKey(Encoding.UTF8.GetBytes(Configuration["Tokens:Key"]))
+                                };
+                            });
+        }
+
+        private void DatabaseContext(IServiceCollection services)
+        {
+            var server = Configuration["Database:Server"];
+            var database = Configuration["Database:Name"];
+            var user = Configuration["Database:User"];
+            var password = Configuration["Database:Password"];
+            var connection = String.Format("Server={0};Database={1};User={2};Password={3};", server, database, user, password);
+
+            services.AddDbContext<PTZFrwContext>(options => options.UseSqlServer(connection));
+        }
+
+        private void AddSwagger(IServiceCollection services)
+        {
+            services.AddSwaggerGen(c =>
+            {
+                c.SwaggerDoc("v1", new Info
+                {
+                    Title = "PTZ.Frw",
+                    Version = "v1",
+                    Contact = new Contact()
+                    {
+                        Name = "Pedro Torrezão",
+                        Url = "https://github.com/ptorrezao/PTZ.Frw"
+                    }, 
+                });
+                c.AddSecurityDefinition("Bearer", new ApiKeyScheme
+                {
+                    Description = "JWT Authorization header using the Bearer scheme. Example: \"Authorization: Bearer {token}\"",
+                    Name = "Authorization",
+                    In = "header",
+                    Type = "apiKey"
+                });
+            });
         }
     }
 }
