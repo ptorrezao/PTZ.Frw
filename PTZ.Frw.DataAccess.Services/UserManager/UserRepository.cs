@@ -1,4 +1,5 @@
-﻿using PTZ.Frw.DataAccess.Models;
+﻿using Microsoft.EntityFrameworkCore;
+using PTZ.Frw.DataAccess.Models;
 using System;
 using System.Collections.Generic;
 using System.Linq;
@@ -9,10 +10,6 @@ namespace PTZ.Frw.DataAccess
     {
         private readonly PTZFrwContext _context;
 
-        public UserRepository()
-        {
-        }
-
         public UserRepository(PTZFrwContext ctx)
         {
             _context = ctx;
@@ -20,7 +17,10 @@ namespace PTZ.Frw.DataAccess
 
         public void DeleteUser(int id)
         {
-            User user = _context.Users.FirstOrDefault(x => x.Id == id);
+            User user = _context.Users.Include(x => x.Details).FirstOrDefault(x => x.Id == id);
+
+            _context.Entry(user.Details).State = EntityState.Deleted;
+
             _context.Users.Remove(user);
             _context.SaveChanges();
         }

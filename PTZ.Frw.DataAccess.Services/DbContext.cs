@@ -8,8 +8,8 @@ namespace PTZ.Frw.DataAccess
         public PTZFrwContext(DbContextOptions<PTZFrwContext> options)
             : base (options)
         {
-
         }
+
         public DbSet<User> Users { get; set; }
 
         protected override void OnModelCreating(ModelBuilder modelBuilder)
