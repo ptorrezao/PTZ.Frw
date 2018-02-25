@@ -1,10 +1,7 @@
 ﻿using Microsoft.EntityFrameworkCore;
 using PTZ.Frw.DataAccess.Models;
-using System;
-using System.Collections.Generic;
-using System.Text;
 
-namespace PTZ.Frw.DataAccess.Services
+namespace PTZ.Frw.DataAccess
 {
     public class PTZFrwContext: DbContext
     {

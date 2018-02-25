@@ -27,5 +27,10 @@ namespace PTZ.Frw.Utils
 
             return  Convert.ToBase64String(hashBytes);
         }
+
+        public static string PreparePassword(object passwordSalt, string password)
+        {
+            throw new NotImplementedException();
+        }
     }
 }

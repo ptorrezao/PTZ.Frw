@@ -16,10 +16,10 @@ using PTZ.Frw.WebApi.Services.SignInManager;
 using Swashbuckle.AspNetCore.Swagger;
 using Swashbuckle.AspNetCore.SwaggerUI;
 using Microsoft.AspNetCore.Http;
-using PTZ.Frw.DataAccess.Interfaces;
-using PTZ.Frw.DataAccess.Services.UserManager;
-using PTZ.Frw.DataAccess.Services;
 using Microsoft.EntityFrameworkCore;
+using PTZ.Frw.WebApi.Services.UserManager;
+using PTZ.Frw.DataAccess.Services;
+using PTZ.Frw.DataAccess;
 
 namespace PTZ.Frw.WebAPI
 {
@@ -40,10 +40,12 @@ namespace PTZ.Frw.WebAPI
             this.AddSwagger(services);
             this.AddAuthentication(services);
             this.DatabaseContext(services);
-
             services.AddSingleton<IHttpContextAccessor, HttpContextAccessor>();
+
             services.AddTransient<ISignInManager, SignInManager>();
-            services.AddTransient<IUserManager, UserManager>();
+
+            services.AddTransient<IUserRepository, UserRepository>();
+            services.AddTransient<IUserService, UserService>();
         }
 
         // This method gets called by the runtime. Use this method to configure the HTTP request pipeline.
@@ -58,7 +60,6 @@ namespace PTZ.Frw.WebAPI
             app.UseSwaggerUI(c =>
             {
                 c.SwaggerEndpoint("/swagger/v1/swagger.json", "PTZ.Frw - V1");
-                c.DocumentTitle = "PTZ.Frw";
             });
 
             app.UseAuthentication();

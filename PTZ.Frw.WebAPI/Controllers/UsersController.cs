@@ -5,36 +5,44 @@ using System.Threading.Tasks;
 using Microsoft.AspNetCore.Authorization;
 using Microsoft.AspNetCore.Http;
 using Microsoft.AspNetCore.Mvc;
+using PTZ.Frw.WebApi.Services.UserManager;
+using PTZ.Frw.WebAPI.Interfaces;
+using PTZ.Frw.WebAPI.Models.Users;
+using PTZ.Frw.WebAPI.Utils;
 
 namespace PTZ.Frw.WebAPI.Controllers
 {
     [Route("api/[controller]")]
-    public class ValuesController : Controller
+    public class UsersController : BaseController
     {
-        private int _currentUser;
+        private readonly IUserService _userManager;
 
-        public ValuesController(IHttpContextAccessor httpContextAccessor)
+        public UsersController(
+            IHttpContextAccessor httpContextAccessor,
+            IUserService userManager) :
+            base(httpContextAccessor)
         {
-            _currentUser = httpContextAccessor.CurrentUser();
+            _userManager = userManager;
         }
 
         // GET api/values
         [HttpGet]
         [Authorize]
-        public IEnumerable<string> Get()
+        public IEnumerable<UserDTO> Get()
         {
-            return new string[] { _currentUser.ToString(), "value2" };
+            return _userManager.GetUsers();
         }
 
         // GET api/values/5
         [HttpGet("{id}")]
-        public string Get(int id)
+        public UserDTO Get(int id)
         {
-            return "value";
+            return _userManager.GetUser(id);
         }
 
         // POST api/values
         [HttpPost]
+        [Obsolete]
         public void Post([FromBody]string value)
         {
         }

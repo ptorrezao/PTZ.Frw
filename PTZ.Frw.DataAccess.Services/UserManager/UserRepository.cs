@@ -1,22 +1,22 @@
-﻿using PTZ.Frw.DataAccess.Interfaces;
-using PTZ.Frw.DataAccess.Models;
+﻿using PTZ.Frw.DataAccess.Models;
 using System;
+using System.Collections.Generic;
 using System.Linq;
 
-namespace PTZ.Frw.DataAccess.Services.UserManager
+namespace PTZ.Frw.DataAccess
 {
-    public class UserManager : IUserManager
+    public class UserRepository : IUserRepository
     {
         private readonly PTZFrwContext _context;
 
-        public UserManager(PTZFrwContext ctx)
+        public UserRepository(PTZFrwContext ctx)
         {
             _context = ctx;
         }
 
-        public User FindByUsername(string userName)
+        public User GetUser(int key)
         {
-            User user = _context.Users.FirstOrDefault(x => x.Username == userName);
+            User user = _context.Users.FirstOrDefault(x => x.Id == key);
 
             if (user != null)
             {
@@ -24,6 +24,24 @@ namespace PTZ.Frw.DataAccess.Services.UserManager
             }
 
             return user;
+        }
+
+        public User GetUserByUsername(string username)
+        {
+            User user = _context.Users.FirstOrDefault(x => x.Username == username);
+
+            if (user != null)
+            {
+                PerformValidations(user);
+            }
+
+            return user;
+        }
+
+        public List<User> GetUsers()
+        {
+            List<User> users = _context.Users.ToList();
+            return users;
         }
 
         public User SaveUser(User user)
