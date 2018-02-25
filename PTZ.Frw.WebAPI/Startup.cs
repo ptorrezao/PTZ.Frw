@@ -14,6 +14,7 @@ using Microsoft.IdentityModel.Tokens;
 using PTZ.Frw.WebAPI.Interfaces;
 using PTZ.Frw.WebApi.Services.SignInManager;
 using Swashbuckle.AspNetCore.Swagger;
+using Swashbuckle.AspNetCore.SwaggerUI;
 using Microsoft.AspNetCore.Http;
 using PTZ.Frw.DataAccess.Interfaces;
 using PTZ.Frw.DataAccess.Services.UserManager;
@@ -56,7 +57,8 @@ namespace PTZ.Frw.WebAPI
             app.UseSwagger();
             app.UseSwaggerUI(c =>
             {
-                c.SwaggerEndpoint("/swagger/v1/swagger.json", "My API V1");
+                c.SwaggerEndpoint("/swagger/v1/swagger.json", "PTZ.Frw - V1");
+                c.DocumentTitle = "PTZ.Frw";
             });
 
             app.UseAuthentication();
@@ -104,7 +106,7 @@ namespace PTZ.Frw.WebAPI
                     {
                         Name = "Pedro Torrezão",
                         Url = "https://github.com/ptorrezao/PTZ.Frw"
-                    }, 
+                    },
                 });
                 c.AddSecurityDefinition("Bearer", new ApiKeyScheme
                 {
@@ -113,7 +115,10 @@ namespace PTZ.Frw.WebAPI
                     In = "header",
                     Type = "apiKey"
                 });
+                c.IgnoreObsoleteActions();
+                
             });
+          
         }
     }
 }
