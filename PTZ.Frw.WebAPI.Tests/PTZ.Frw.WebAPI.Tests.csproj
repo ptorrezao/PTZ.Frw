@@ -14,7 +14,6 @@
   </ItemGroup>
 
   <ItemGroup>
-    <ProjectReference Include="..\PTZ.Frw.DataAccess.Models\PTZ.Frw.DataAccess.Models.csproj" />
     <ProjectReference Include="..\PTZ.Frw.Utils\PTZ.Frw.Utils.csproj" />
     <ProjectReference Include="..\PTZ.Frw.WebAPI.Models\PTZ.Frw.WebAPI.Models.csproj" />
     <ProjectReference Include="..\PTZ.Frw.WebApi.Services\PTZ.Frw.WebApi.Services.csproj" />

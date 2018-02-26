@@ -11,16 +11,15 @@ namespace PTZ.Frw.WebApi.Services.SignInManager
 {
     public class SignInManager : ISignInManager
     {
-        private readonly IUserRepository _usrMng;
+        private readonly IUnitOfWork _unitOfWork;
         private readonly IUserService _userSvc;
 
-        public SignInManager(IUserRepository usrMng, IUserService userSvc)
+        public SignInManager(IUnitOfWork unitOfWork)
         {
             TinyMapper.Bind<RegisterRequest, User>();
             TinyMapper.Bind<RegisterRequest, UserDetails>();
-       
-            _usrMng = usrMng;
-            _userSvc = userSvc;
+
+            _unitOfWork = unitOfWork;
         }
 
         public UserDTO IsValidLogin(AuthRequest authUserRequest, out List<Validation> validations)
@@ -28,9 +27,9 @@ namespace PTZ.Frw.WebApi.Services.SignInManager
             validations = new List<Validation>();
 
             UserDTO userDto = null;
-            User user = _usrMng.GetUserByUsername(authUserRequest.Username);
+            User user = _unitOfWork.Users.GetByUsername(authUserRequest.Username);
 
-            if (user.Username != null &&
+            if (user != null &&
                 String.Equals(user.Username, authUserRequest.Username, StringComparison.OrdinalIgnoreCase))
             {
                 string answeredPwd = Utils.Crypto.PreparePassword(user.PasswordSalt, authUserRequest.Password);
@@ -53,7 +52,7 @@ namespace PTZ.Frw.WebApi.Services.SignInManager
 
         public bool RegisterUser(RegisterRequest registerRequest)
         {
-            if (!_usrMng.UserExists(registerRequest.Username))
+            if (!_unitOfWork.Users.Any(x => x.Username == registerRequest.Username))
             {
                 string guid = Guid.NewGuid().ToString();
 
@@ -61,9 +60,11 @@ namespace PTZ.Frw.WebApi.Services.SignInManager
                 newUser.PasswordSalt = guid;
                 newUser.PasswordHash = Utils.Crypto.PreparePassword(guid, registerRequest.Password);
                 newUser.Details = TinyMapper.Map<UserDetails>(registerRequest);
-                newUser = _usrMng.SaveUser(newUser);
 
-                return newUser != null;
+                newUser.Role = _unitOfWork.Roles.SingleOrDefault(x => x.DefaultRole);
+                _unitOfWork.Users.Add(newUser);
+                
+                return _unitOfWork.Complete() > 0;
             }
 
             return false;
