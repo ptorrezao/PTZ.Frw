@@ -61,7 +61,12 @@ namespace PTZ.Frw.DataAccess
 
             if (userExists)
             {
-                _context.Users.Update(user);
+                User existingUser = _context.Users.First(x => x.Id == user.Id);
+                existingUser.FirstName = user.FirstName;
+                existingUser.MiddleName = user.MiddleName;
+                existingUser.LastName = user.LastName;
+
+                _context.Users.Update(existingUser);
             }
             else
             {

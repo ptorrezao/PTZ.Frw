@@ -46,7 +46,6 @@ namespace PTZ.Frw.WebAPI.Controllers
             return _userManager.SaveUser(value);
         }
 
-
         // DELETE api/Users/5
         [HttpDelete("{id}")]
         public void Delete(int id)
