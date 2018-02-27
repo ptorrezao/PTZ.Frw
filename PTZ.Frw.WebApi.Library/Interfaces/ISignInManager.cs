@@ -1,11 +1,9 @@
-﻿using System;
+﻿using PTZ.Frw.WebAPI.Library.Models.Authentication;
+using PTZ.Frw.WebAPI.Library.Models.Users;
+using PTZ.Frw.WebAPI.Library.Models.Validations;
 using System.Collections.Generic;
-using System.Text;
-using PTZ.Frw.DataAccess.Models;
-using PTZ.Frw.WebAPI.Models;
-using PTZ.Frw.WebAPI.Models.Users;
 
-namespace PTZ.Frw.WebAPI.Interfaces
+namespace PTZ.Frw.WebAPI.Library.Interfaces
 {
     public interface ISignInManager
     {

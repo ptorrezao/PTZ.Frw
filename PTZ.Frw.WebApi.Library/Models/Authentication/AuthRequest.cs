@@ -1,9 +1,8 @@
 ﻿using System;
 using System.Collections.Generic;
-using System.Linq;
-using System.Threading.Tasks;
+using System.Text;
 
-namespace PTZ.Frw.WebAPI.Models
+namespace PTZ.Frw.WebAPI.Library.Models.Authentication
 {
     public class AuthRequest
     {

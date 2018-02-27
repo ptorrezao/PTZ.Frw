@@ -6,16 +6,15 @@ using Microsoft.AspNetCore.Hosting;
 using Microsoft.Extensions.Configuration;
 using Microsoft.Extensions.DependencyInjection;
 using Microsoft.IdentityModel.Tokens;
-using PTZ.Frw.WebAPI.Interfaces;
-using PTZ.Frw.WebApi.Services.SignInManager;
 using Swashbuckle.AspNetCore.Swagger;
 using Microsoft.AspNetCore.Http;
 using Microsoft.EntityFrameworkCore;
-using PTZ.Frw.WebApi.Services.UserManager;
 using PTZ.Frw.DataAccess.EF;
 using PTZ.Frw.DataAccess;
 using PTZ.Frw.DataAccess.Repositories;
 using PTZ.Frw.DataAccess.EF.Repositories;
+using PTZ.Frw.WebAPI.Library.Services;
+using PTZ.Frw.WebAPI.Library.Interfaces;
 
 namespace PTZ.Frw.WebAPI
 {

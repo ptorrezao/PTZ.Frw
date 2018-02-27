@@ -1,18 +1,18 @@
 ﻿using Nelibur.ObjectMapper;
 using PTZ.Frw.DataAccess;
 using PTZ.Frw.DataAccess.Models;
-using PTZ.Frw.WebAPI.Interfaces;
-using PTZ.Frw.WebAPI.Models;
-using PTZ.Frw.WebAPI.Models.Users;
+using PTZ.Frw.WebAPI.Library.Interfaces;
+using PTZ.Frw.WebAPI.Library.Models.Authentication;
+using PTZ.Frw.WebAPI.Library.Models.Users;
+using PTZ.Frw.WebAPI.Library.Models.Validations;
 using System;
 using System.Collections.Generic;
 
-namespace PTZ.Frw.WebApi.Services.SignInManager
+namespace PTZ.Frw.WebAPI.Library.Services
 {
     public class SignInManager : ISignInManager
     {
         private readonly IUnitOfWork _unitOfWork;
-        private readonly IUserService _userSvc;
 
         public SignInManager(IUnitOfWork unitOfWork)
         {
@@ -63,7 +63,7 @@ namespace PTZ.Frw.WebApi.Services.SignInManager
 
                 newUser.Role = _unitOfWork.Roles.SingleOrDefault(x => x.DefaultRole);
                 _unitOfWork.Users.Add(newUser);
-                
+
                 return _unitOfWork.Complete() > 0;
             }
 

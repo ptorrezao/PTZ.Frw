@@ -1,9 +1,7 @@
-﻿using System;
+﻿using PTZ.Frw.WebAPI.Library.Models.Users;
 using System.Collections.Generic;
-using System.Text;
-using PTZ.Frw.WebAPI.Models.Users;
 
-namespace PTZ.Frw.WebAPI.Interfaces
+namespace PTZ.Frw.WebAPI.Library.Interfaces
 {
     public interface IUserService
     {

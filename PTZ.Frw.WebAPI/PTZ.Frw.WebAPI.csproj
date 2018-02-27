@@ -24,7 +24,6 @@
     <ProjectReference Include="..\PTZ.Frw.DataAccess.EF\PTZ.Frw.DataAccess.EF.csproj" />
     <ProjectReference Include="..\PTZ.Frw.DataAccess\PTZ.Frw.DataAccess.csproj" />
     <ProjectReference Include="..\PTZ.Frw.Utils\PTZ.Frw.Utils.csproj" />
-    <ProjectReference Include="..\PTZ.Frw.WebAPI.Models\PTZ.Frw.WebAPI.Models.csproj" />
-    <ProjectReference Include="..\PTZ.Frw.WebApi.Services\PTZ.Frw.WebApi.Services.csproj" />
+    <ProjectReference Include="..\PTZ.Frw.WebApi.Library\PTZ.Frw.WebAPI.Library.csproj" />
   </ItemGroup>
 </Project>

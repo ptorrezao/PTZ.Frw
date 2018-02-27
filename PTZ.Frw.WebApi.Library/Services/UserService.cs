@@ -1,14 +1,12 @@
-﻿using System;
-using System.Collections.Generic;
-using System.Text;
-using Nelibur.ObjectMapper;
+﻿using Nelibur.ObjectMapper;
 using PTZ.Frw.DataAccess;
 using PTZ.Frw.DataAccess.Models;
-using PTZ.Frw.DataAccess.Repositories;
-using PTZ.Frw.WebAPI.Interfaces;
-using PTZ.Frw.WebAPI.Models.Users;
+using PTZ.Frw.WebAPI.Library.Interfaces;
+using PTZ.Frw.WebAPI.Library.Models.Users;
+using System;
+using System.Collections.Generic;
 
-namespace PTZ.Frw.WebApi.Services.UserManager
+namespace PTZ.Frw.WebAPI.Library.Services
 {
     public class UserService : IUserService
     {

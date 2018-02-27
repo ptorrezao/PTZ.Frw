@@ -5,10 +5,9 @@ using System.Threading.Tasks;
 using Microsoft.AspNetCore.Authorization;
 using Microsoft.AspNetCore.Http;
 using Microsoft.AspNetCore.Mvc;
-using PTZ.Frw.WebApi.Services.UserManager;
-using PTZ.Frw.WebAPI.Interfaces;
-using PTZ.Frw.WebAPI.Models.Users;
 using PTZ.Frw.WebAPI.Utils;
+using PTZ.Frw.WebAPI.Library.Interfaces;
+using PTZ.Frw.WebAPI.Library.Models.Users;
 
 namespace PTZ.Frw.WebAPI.Controllers
 {

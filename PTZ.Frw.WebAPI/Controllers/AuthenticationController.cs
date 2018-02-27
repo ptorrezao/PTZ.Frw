@@ -2,16 +2,15 @@
 using Microsoft.AspNetCore.Mvc;
 using Microsoft.Extensions.Configuration;
 using Microsoft.IdentityModel.Tokens;
-using PTZ.Frw.WebApi.Services.UserManager;
-using PTZ.Frw.WebAPI.Interfaces;
-using PTZ.Frw.WebAPI.Models;
-using PTZ.Frw.WebAPI.Models.Users;
+using PTZ.Frw.WebAPI.Library.Interfaces;
+using PTZ.Frw.WebAPI.Library.Models.Authentication;
+using PTZ.Frw.WebAPI.Library.Models.Users;
+using PTZ.Frw.WebAPI.Library.Models.Validations;
 using System;
 using System.Collections.Generic;
 using System.IdentityModel.Tokens.Jwt;
 using System.Linq;
 using System.Security.Claims;
-using System.Security.Principal;
 using System.Text;
 
 namespace PTZ.Frw.WebAPI.Controllers

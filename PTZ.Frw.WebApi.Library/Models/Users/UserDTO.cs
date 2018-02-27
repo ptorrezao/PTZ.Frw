@@ -1,9 +1,4 @@
-﻿using System;
-using System.Collections.Generic;
-using System.Security.Claims;
-using System.Text;
-
-namespace PTZ.Frw.WebAPI.Models.Users
+﻿namespace PTZ.Frw.WebAPI.Library.Models.Users
 {
     public class UserDTO
     {
