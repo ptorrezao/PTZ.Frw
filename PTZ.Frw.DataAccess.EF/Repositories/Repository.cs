@@ -19,12 +19,12 @@ namespace PTZ.Frw.DataAccess.EF.Repositories
 
         public TEntity Get(int id)
         {
-           return Context.Set<TEntity>().Find(id);
+                return Context.Set<TEntity>().Find(id);
         }
 
         public IEnumerable<TEntity> GetAll()
         {
-           return Context.Set<TEntity>().ToList();
+            return Context.Set<TEntity>().ToList();
         }
 
         public IEnumerable<TEntity> Find(Expression<Func<TEntity, bool>> predicate)

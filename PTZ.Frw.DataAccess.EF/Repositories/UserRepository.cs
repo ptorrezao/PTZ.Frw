@@ -1,4 +1,5 @@
-﻿using PTZ.Frw.DataAccess.Models;
+﻿using Microsoft.EntityFrameworkCore;
+using PTZ.Frw.DataAccess.Models;
 using PTZ.Frw.DataAccess.Repositories;
 using System;
 using System.Collections.Generic;
@@ -19,9 +20,26 @@ namespace PTZ.Frw.DataAccess.EF.Repositories
             get { return Context as PTZFrwContext; }
         }
 
+        public IEnumerable<User> GetAllWithRole()
+        {
+            return _context
+                    .Users
+                    .Include(x => x.Role)
+                    .ToList();
+        }
+
         public User GetByUsername(string username)
         {
-            return _context.Users.FirstOrDefault(x => x.Username == username);
+            return _context.Users
+                    .Include(x => x.Role)
+                    .FirstOrDefault(x => x.Username == username);
+        }
+
+        public User GetWithRole(int id)
+        {
+            return _context.Users
+                    .Include(x => x.Role)
+                    .FirstOrDefault(x => x.Id == id);
         }
 
         public override void Save(User entity)

@@ -26,6 +26,6 @@ namespace PTZ.Frw.DataAccess.Models
         public virtual UserDetails Details { get; set; }
 
         [ForeignKey("RoleId")]
-        public virtual Role Role { get; set; }
+        public Role Role { get; set; }
     }
 }

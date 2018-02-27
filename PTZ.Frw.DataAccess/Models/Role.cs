@@ -17,6 +17,6 @@ namespace PTZ.Frw.DataAccess.Models
 
         public bool DefaultRole { get; set; }
 
-        public virtual IEnumerable<User> Users { get; set; }
+        public IEnumerable<User> Users { get; set; }
     }
 }

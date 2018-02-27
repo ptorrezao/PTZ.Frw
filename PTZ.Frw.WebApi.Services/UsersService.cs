@@ -16,7 +16,11 @@ namespace PTZ.Frw.WebApi.Services.UserManager
 
         public UserService(IUnitOfWork unitOfWork)
         {
-            TinyMapper.Bind<User, UserDTO>();
+            TinyMapper.Bind<User, UserDTO>(c =>
+            {
+                c.Bind(s => s.Role.Name, t => t.Role);
+            });
+
             TinyMapper.Bind<UserDTO, User>();
             TinyMapper.Bind<List<User>, List<UserDTO>>();
 
@@ -26,7 +30,7 @@ namespace PTZ.Frw.WebApi.Services.UserManager
         public void DeleteUser(int id)
         {
             User user = _unitOfWork.Users.Get(id);
-            
+
             _unitOfWork.Users.Remove(user);
 
             _unitOfWork.Complete();
@@ -41,14 +45,14 @@ namespace PTZ.Frw.WebApi.Services.UserManager
 
         public UserDTO GetUser(int key)
         {
-            User user = _unitOfWork.Users.Get(key);
+            User user = _unitOfWork.Users.GetWithRole(key);
 
             return TinyMapper.Map<UserDTO>(user);
         }
 
         public IEnumerable<UserDTO> GetUsers()
         {
-            IEnumerable<User> users = _unitOfWork.Users.GetAll();
+            IEnumerable<User> users = _unitOfWork.Users.GetAllWithRole();
 
             return TinyMapper.Map<List<UserDTO>>(users);
         }
