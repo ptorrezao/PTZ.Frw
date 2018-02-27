@@ -1,25 +1,21 @@
 ﻿using System;
-using System.Collections.Generic;
-using System.Linq;
 using System.Text;
-using System.Threading.Tasks;
 using Microsoft.AspNetCore.Authentication.JwtBearer;
 using Microsoft.AspNetCore.Builder;
 using Microsoft.AspNetCore.Hosting;
 using Microsoft.Extensions.Configuration;
 using Microsoft.Extensions.DependencyInjection;
-using Microsoft.Extensions.Logging;
-using Microsoft.Extensions.Options;
 using Microsoft.IdentityModel.Tokens;
 using PTZ.Frw.WebAPI.Interfaces;
 using PTZ.Frw.WebApi.Services.SignInManager;
 using Swashbuckle.AspNetCore.Swagger;
-using Swashbuckle.AspNetCore.SwaggerUI;
 using Microsoft.AspNetCore.Http;
 using Microsoft.EntityFrameworkCore;
 using PTZ.Frw.WebApi.Services.UserManager;
-using PTZ.Frw.DataAccess.Services;
+using PTZ.Frw.DataAccess.EF;
 using PTZ.Frw.DataAccess;
+using PTZ.Frw.DataAccess.Repositories;
+using PTZ.Frw.DataAccess.EF.Repositories;
 
 namespace PTZ.Frw.WebAPI
 {
@@ -42,9 +38,10 @@ namespace PTZ.Frw.WebAPI
             this.DatabaseContext(services);
             services.AddSingleton<IHttpContextAccessor, HttpContextAccessor>();
 
-            services.AddTransient<ISignInManager, SignInManager>();
-
+            services.AddTransient<IUnitOfWork, UnitOfWork>();
             services.AddTransient<IUserRepository, UserRepository>();
+
+            services.AddTransient<ISignInManager, SignInManager>();
             services.AddTransient<IUserService, UserService>();
         }
 

@@ -4,6 +4,7 @@ using System.Text;
 using Nelibur.ObjectMapper;
 using PTZ.Frw.DataAccess;
 using PTZ.Frw.DataAccess.Models;
+using PTZ.Frw.DataAccess.Repositories;
 using PTZ.Frw.WebAPI.Interfaces;
 using PTZ.Frw.WebAPI.Models.Users;
 
@@ -11,39 +12,48 @@ namespace PTZ.Frw.WebApi.Services.UserManager
 {
     public class UserService : IUserService
     {
-        private readonly IUserRepository _usrMng;
+        private readonly IUnitOfWork _unitOfWork;
 
-        public UserService(IUserRepository usrMng)
+        public UserService(IUnitOfWork unitOfWork)
         {
-            TinyMapper.Bind<User, UserDTO>();
+            TinyMapper.Bind<User, UserDTO>(c =>
+            {
+                c.Bind(s => s.Role.Name, t => t.Role);
+            });
+
             TinyMapper.Bind<UserDTO, User>();
             TinyMapper.Bind<List<User>, List<UserDTO>>();
 
-            _usrMng = usrMng;
+            _unitOfWork = unitOfWork;
         }
 
         public void DeleteUser(int id)
         {
-            _usrMng.DeleteUser(id);
+            User user = _unitOfWork.Users.Get(id);
+
+            _unitOfWork.Users.Remove(user);
+
+            _unitOfWork.Complete();
         }
 
         public UserDTO FindByUsername(string username)
         {
-            User user = _usrMng.GetUserByUsername(username);
+            User user = _unitOfWork.Users.GetByUsername(username);
 
             return TinyMapper.Map<UserDTO>(user);
         }
 
         public UserDTO GetUser(int key)
         {
-            User user = _usrMng.GetUser(key);
+            User user = _unitOfWork.Users.GetWithRole(key);
 
             return TinyMapper.Map<UserDTO>(user);
         }
 
         public IEnumerable<UserDTO> GetUsers()
         {
-            List<User> users = _usrMng.GetUsers();
+            IEnumerable<User> users = _unitOfWork.Users.GetAllWithRole();
+
             return TinyMapper.Map<List<UserDTO>>(users);
         }
 
@@ -51,11 +61,23 @@ namespace PTZ.Frw.WebApi.Services.UserManager
         {
             User user = TinyMapper.Map<User>(userDto);
 
-            _usrMng.SaveUser(user);
+            _unitOfWork.Users.Save(user);
 
-            user = _usrMng.GetUser(user.Id);
+            this.PerformValidations(user);
+
+            _unitOfWork.Complete();
 
             return TinyMapper.Map<UserDTO>(user);
+        }
+
+        private void PerformValidations(User user)
+        {
+            //Password Validation
+            if (user.PasswordSalt == null)
+            {
+                user.PasswordSalt = Guid.NewGuid().ToString();
+                user.PasswordHash = Utils.Crypto.PreparePassword(user.PasswordSalt, user.PasswordHash);
+            }
         }
     }
 }

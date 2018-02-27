@@ -23,6 +23,7 @@ namespace PTZ.Frw.WebAPI.Controllers
         private readonly IUserService _userManager;
         private readonly ISignInManager _signInManager;
 
+
         public AuthenticationController(IConfiguration configuration, IUserService userManager, ISignInManager signInManager)
         {
             _config = configuration;

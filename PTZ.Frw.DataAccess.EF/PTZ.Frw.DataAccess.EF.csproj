@@ -5,9 +5,8 @@
   </PropertyGroup>
 
   <ItemGroup>
-    <Compile Remove="Migrations\20180225141120_Extende User to Userdetail.cs" />
-    <Compile Remove="Migrations\20180225141411_20180225141120_Extende User to Userdetail.cs" />
-    <Compile Remove="Migrations\20180225141503_Extend User to Userdetail.cs" />
+    <Compile Remove="Migrations\20180227000715_AddRoles.cs" />
+    <Compile Remove="Migrations\20180227005941_AddRoles_Changes.cs" />
   </ItemGroup>
 
   <ItemGroup>
@@ -16,8 +15,8 @@
   </ItemGroup>
 
   <ItemGroup>
+    <ProjectReference Include="..\PTZ.Frw.DataAccess\PTZ.Frw.DataAccess.csproj" />
     <ProjectReference Include="..\PTZ.Frw.Utils\PTZ.Frw.Utils.csproj" />
-    <ProjectReference Include="..\PTZ.Frw.WebAPI.Models\PTZ.Frw.WebAPI.Models.csproj" />
   </ItemGroup>
 
 </Project>
