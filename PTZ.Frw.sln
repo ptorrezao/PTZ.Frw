@@ -1,7 +1,7 @@
 ﻿
 Microsoft Visual Studio Solution File, Format Version 12.00
 # Visual Studio 15
-VisualStudioVersion = 15.0.27130.2027
+VisualStudioVersion = 15.0.27130.2036
 MinimumVisualStudioVersion = 10.0.40219.1
 Project("{9A19103F-16F7-4668-BE54-9A1E7A4F7556}") = "PTZ.Frw.WebAPI", "PTZ.Frw.WebAPI\PTZ.Frw.WebAPI.csproj", "{8B7A3F3D-02F0-4B67-AAA7-E90B90941A1D}"
 EndProject
@@ -21,7 +21,9 @@ Project("{9A19103F-16F7-4668-BE54-9A1E7A4F7556}") = "PTZ.Frw.DataAccess", "PTZ.F
 EndProject
 Project("{9A19103F-16F7-4668-BE54-9A1E7A4F7556}") = "PTZ.Frw.DataAccess.EF", "PTZ.Frw.DataAccess.EF\PTZ.Frw.DataAccess.EF.csproj", "{995718FA-5192-4428-9261-079FE61F7806}"
 EndProject
-Project("{FAE04EC0-301F-11D3-BF4B-00C04F79EFBC}") = "PTZ.Frw.WebAPI.Library", "PTZ.Frw.WebApi.Library\PTZ.Frw.WebAPI.Library.csproj", "{AB393696-2463-4B30-926E-49D66732E64C}"
+Project("{9A19103F-16F7-4668-BE54-9A1E7A4F7556}") = "PTZ.Frw.WebAPI.Library", "PTZ.Frw.WebApi.Library\PTZ.Frw.WebAPI.Library.csproj", "{AB393696-2463-4B30-926E-49D66732E64C}"
+EndProject
+Project("{2150E333-8FDC-42A3-9474-1A3956D46DE8}") = "WebApp", "WebApp", "{8D049163-B974-4E38-A8E8-2C39D92D98C5}"
 EndProject
 Global
 	GlobalSection(SolutionConfigurationPlatforms) = preSolution
